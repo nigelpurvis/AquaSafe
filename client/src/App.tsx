@@ -41,19 +41,6 @@ type SafeWaterPoint = {
   type?: string;
 };
 
-function waterTypeLabel(type?: string): string {
-  if (!type) return 'Water source';
-  const labels: Record<string, string> = {
-    drinking_water: 'Drinking water',
-    fountain: 'Fountain',
-    well: 'Well',
-    spring: 'Spring',
-    reservoir: 'Reservoir',
-    river: 'River',
-  };
-  return labels[type] ?? type.replace(/_/g, ' ');
-}
-
 type FemaItem = {
   id: string | number;
   title: string;
