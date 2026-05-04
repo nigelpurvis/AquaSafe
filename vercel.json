@@ -4,7 +4,8 @@
   "outputDirectory": "client/dist",
   "functions": {
     "api/[...all].ts": {
-      "runtime": "nodejs20.x"
+      "memory": 512,
+      "maxDuration": 30
     }
   }
 }
