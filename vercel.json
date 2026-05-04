@@ -1,5 +1,10 @@
 {
-  "buildCommand": "cd client && npm install && npm run build",
+  "installCommand": "npm install && cd server && npm install && cd ../client && npm install",
+  "buildCommand": "cd client && npm run build",
   "outputDirectory": "client/dist",
-  "installCommand": "echo skip"
+  "functions": {
+    "api/[...all].ts": {
+      "runtime": "nodejs20.x"
+    }
+  }
 }
