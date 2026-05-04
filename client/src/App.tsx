@@ -26,6 +26,7 @@ L.Marker.prototype.options.icon = defaultIcon;
 
 const DEFAULT_CENTER: [number, number] = [40.7128, -74.006];
 const DEFAULT_ZOOM = 10;
+const REPO_URL = 'https://github.com/nigelpurvis/AquaSafe';
 
 function directionsUrl(lat: number, lng: number): string {
   return `https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}`;
@@ -534,11 +535,38 @@ export default function App() {
             <p className="text-gray-500">Click a point on the map to see water safety risk.</p>
           )}
 
+          <div className="bg-white border border-gray-200 rounded-lg p-3">
+            <p className="text-sm font-semibold text-gray-800">About this project</p>
+            <p className="mt-1 text-xs text-gray-600">
+              AquaSafe is a hackathon project that combines FEMA data and nearby water sources to help users make safer choices.
+            </p>
+            <a
+              href={REPO_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-2 inline-block text-xs text-blue-600 hover:underline"
+            >
+              GitHub repository
+            </a>
+          </div>
+
           <p className="text-xs text-gray-400 mt-2">
             Data: OpenStreetMap (water), FEMA (disasters), demo reservoir &amp; facility locations. Disaster radius is approximate. See FEMA.gov for official boundaries. Not a substitute for official advisories.
           </p>
         </aside>
       </div>
+      <footer className="bg-slate-900 text-slate-300 text-xs px-4 py-2 border-t border-slate-700 flex items-center justify-center gap-2">
+        <span>Built for disaster-response water safety awareness.</span>
+        <span aria-hidden="true">•</span>
+        <a
+          href={REPO_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-slate-100 hover:text-white underline underline-offset-2"
+        >
+          View on GitHub
+        </a>
+      </footer>
     </div>
   );
 }
