@@ -15,9 +15,11 @@ export type Disaster = {
   riskScore?: number;
 };
 
+const RISK_DISASTER_FETCH_LIMIT = 250;
+
 export async function getDisasters(): Promise<Disaster[]> {
   try {
-    const items = await getFemaDisasters(100);
+    const items = await getFemaDisasters(RISK_DISASTER_FETCH_LIMIT);
     return items.map((d) => ({
       id: d.id,
       disasterNumber: d.disasterNumber,
@@ -27,7 +29,8 @@ export async function getDisasters(): Promise<Disaster[]> {
       lng: d.lng,
       type: d.type,
     }));
-  } catch {
+  } catch (error) {
+    console.error('[Risk] Failed to fetch FEMA disasters for scoring:', error);
     return [];
   }
 }
