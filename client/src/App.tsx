@@ -109,10 +109,11 @@ export default function App() {
   };
 
   useEffect(() => {
-    fetch('/api/health')
-      .then((r) => r.ok)
-      .then(setBackendReachable)
-      .catch(() => setBackendReachable(false));
+    const check = (attempts: number) =>
+      fetch('/api/health')
+        .then((r) => { if (r.ok) setBackendReachable(true); else throw new Error(); })
+        .catch(() => { if (attempts > 1) setTimeout(() => check(attempts - 1), 2000); else setBackendReachable(false); });
+    check(5);
   }, []);
 
   useEffect(() => {
@@ -358,7 +359,7 @@ export default function App() {
         <aside className="bg-gray-50 rounded-lg p-4 border border-gray-200 flex flex-col gap-4 overflow-auto">
           {backendReachable === false && (
             <div className="bg-amber-50 border border-amber-200 text-amber-800 text-sm p-3 rounded-lg">
-              <strong>Backend not connected.</strong> Run <code>npm run dev</code> from repo root.
+              <strong>Service temporarily unavailable.</strong> Some features may not work.
             </div>
           )}
 
